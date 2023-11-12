@@ -4,10 +4,9 @@
   "version": "2.0.0",
   "description": "Backend system for expense tracker website 2.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon src/index.js"
+    "dev": "nodemon src/index.js"
   },
   "author": "Kiran Kankariya",
   "license": "ISC",
@@ -17,5 +16,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3"
   }
 }
