@@ -7,7 +7,6 @@ const Register = () => {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    phone: "",
     password: "",
   });
 
@@ -51,17 +50,6 @@ const Register = () => {
             />
           </div>
 
-          <div className="text-lg my-3">
-            <label className="mx-3">Phone No.:</label>
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone"
-              value={user.phone}
-              onChange={handleinputs}
-              className="bg-indigo-950 text-white outline-none rounded-xl px-2 py-1"
-            />
-          </div>
 
           <div className="text-lg my-3">
             <label className="mx-3">Password:</label>

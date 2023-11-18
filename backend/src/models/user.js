@@ -1,4 +1,5 @@
 import mongoose  from "mongoose";
+import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -9,6 +10,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    password:{
+        type: String,
+        required: [true, "password is required"],
     },
     tokens: [
         {
@@ -26,5 +31,25 @@ const userSchema = new mongoose.Schema({
     ]
 })
 
+
+
+/* 
+ we used normal function instead of arrow function becoz 
+ "arrow function doesn't have refrence or not context is known to arrow function"
+ */
+
+
+
+userSchema.pre("save", async function (req, res, next) {   
+    if(!this.isModified("password")) return next();
+
+
+    this.password = bcrypt.hash(this.password, 10)
+    next()
+})
+
+userSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password)                        // return boolean
+}
 
 export const user = mongoose.Schema("User", userSchema)
