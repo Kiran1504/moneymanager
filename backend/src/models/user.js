@@ -1,55 +1,79 @@
-import mongoose  from "mongoose";
-import bcrypt from 'bcrypt'
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         required: true,
     },
-    email:{
+    email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
-    password:{
+    password: {
         type: String,
         required: [true, "password is required"],
     },
     tokens: [
         {
-            token:{
-                type:String,
-                required : true
-            }
-        }
+            token: {
+                type: String,
+                required: true,
+            },
+        },
     ],
     expenses: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Expense"
+            expense: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Expense",
+            },
         }
-    ]
-})
-
-
+        // {
+        //     date: {
+        //         type: Date,
+        //         required: true
+        //     },
+        //     category: {
+        //         type: String,
+        //         required: true
+        //     },
+        //     amount: {
+        //         type: String,
+        //         required: true
+        //     },
+        // }
+    ],
+});
 
 /* 
  we used normal function instead of arrow function becoz 
  "arrow function doesn't have refrence or not context is known to arrow function"
  */
 
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next();
 
-
-userSchema.pre("save", async function (req, res, next) {   
-    if(!this.isModified("password")) return next();
-
-
-    this.password = bcrypt.hash(this.password, 10)
-    next()
-})
+    this.password = bcrypt.hash(this.password, 10);
+    next();
+});
 
 userSchema.methods.isPasswordCorrect = async function (password) {
-    return await bcrypt.compare(password, this.password)                        // return boolean
+    return await bcrypt.compare(password, this.password); // return boolean
+};
+
+userSchema.methods.generateAuthToken = async function () {
+    try {
+        const newToken = jwt.sign({ _id: this._id }, process.env.SECRET_KEY)
+        this.tokens = this.tokens.concat({ token: newToken })
+        await this.save();
+        return newToken
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-export const user = mongoose.Schema("User", userSchema)
+export const user = mongoose.model("User", userSchema);
+

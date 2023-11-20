@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 const Register = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     name: "",
@@ -15,8 +16,23 @@ const Register = () => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };
-  const submitted = (event)=>{
+  const submitted = async (event) => {
     event.preventDefault()
+    const { name, email, password } = user
+    const res = await axios.post("http://localhost:5000/register", { name, email, password }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(res);
+    if (res.data.error) {
+      alert(res.data.message)
+      console.log(res.data.message);
+    } else {
+      alert(res.data.message)
+      console.log(res.data.message);
+      navigate("/signin")
+    }
   }
   return (
     <div className="text-center w-full">
@@ -63,7 +79,7 @@ const Register = () => {
             />
           </div>
 
-          
+
         </div>
         <div>
           <input
