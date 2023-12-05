@@ -6,8 +6,8 @@ export default function Navbar() {
 
     const classes = ({ isActive, isPending }) =>
         isActive
-            ? "bg-black text-white h-full p-3 md:p-4 min-[876px]:px-14 text-xs px-2 md:text-lg  w-1/4 rounded-md  text-center m-1 shadow-red-400/40 drop-shadow-xl"
-            : "bg-white hover:bg-zinc-500 hover:text-white h-full p-3 md:p-4 min-[876px]:px-14 text-sm px-2 md:text-lg  w-1/4 rounded-md  text-center m-1";
+            ? "bg-white text-black h-full p-3 md:p-4 min-[876px]:px-14 text-xs px-2 md:text-lg  w-1/4 rounded-md  text-center m-1 shadow-red-400/40 drop-shadow-xl"
+            : "bg-black hover:bg-zinc-500 text-white hover:text-white h-full p-3 md:p-4 min-[876px]:px-14 text-sm px-2 md:text-lg  w-1/4 rounded-md  text-center m-1";
 
     return (
         <>
@@ -36,9 +36,12 @@ export default function Navbar() {
                     <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
                         <NavLink to="/signup" className={classes}>Register</NavLink>
                     </li>
-                    <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative  ">
-                        <NavLink className="bg-white hover:bg-zinc-500 hover:text-white h-full p-3 md:p-4 min-[876px]:px-14 text-xs px-2 md:text-lg  w-1/4 rounded-md  text-center m-1">Logout</NavLink>
+                    <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
+                        <NavLink to="/logout" className={classes}>Logout</NavLink>
                     </li>
+                    {/* <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative  ">
+                        <NavLink className="bg-white hover:bg-zinc-500 hover:text-white h-full p-3 md:p-4 min-[876px]:px-14 text-xs px-2 md:text-lg  w-1/4 rounded-md  text-center m-1">Logout</NavLink>
+                    </li> */}
 
 
                 </ul>

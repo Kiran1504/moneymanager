@@ -26,25 +26,19 @@ const userSchema = new mongoose.Schema({
     ],
     expenses: [
         {
-            expense: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Expense",
+            date: {
+                type: String,
+                required: true
+            },
+            category: {
+                type: String,
+                required: true
+            },
+            amount: {
+                type: String,
+                required: true
             },
         }
-        // {
-        //     date: {
-        //         type: Date,
-        //         required: true
-        //     },
-        //     category: {
-        //         type: String,
-        //         required: true
-        //     },
-        //     amount: {
-        //         type: String,
-        //         required: true
-        //     },
-        // }
     ],
 });
 
@@ -69,6 +63,7 @@ userSchema.methods.generateAuthToken = async function () {
         const newToken = jwt.sign({ _id: this._id }, process.env.SECRET_KEY)
         this.tokens = this.tokens.concat({ token: newToken })
         await this.save();
+        console.log(newToken);
         return newToken
     } catch (error) {
         console.log(error);

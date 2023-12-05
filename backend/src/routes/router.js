@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ error: "Invalid Credentials!", message: "Invalid Credentials!" })
     }
     const token = await ifUser.generateAuthToken()
-    res.cookie("jwtauth", token, {
+    res.cookie("logintokens", token, {
       expires: new Date(Date.now() + 25892000000),
       httpOnly: true
     })
@@ -55,8 +55,8 @@ router.post("/login", async (req, res) => {
 })
 
 router.post("/addexpense", authenticate, async (req, res) => {
-  const { date, cat, amt } = req.body;
-  if (!date || !cat || !amt) {
+  const { date, category, amount } = req.body;
+  if (!date || !category || !amount) {
     return res.status(400).json({ error: "Invalid income/expense detail!!!", message: "Invalid income/expense detail!!!" });
   }
   try {
@@ -64,12 +64,8 @@ router.post("/addexpense", authenticate, async (req, res) => {
     if (!userData) {
       return res.status(400).json({ error: "User doesn't exist!!! plzz Register", message: "User doesn't exist!!! plzz Register" })
     }
-    // userData.expenses = userData.expenses.concat({ date: date, category: cat, amount: amt })
-    // const saved = await userData.save()
-    const expenseSaved = new expenses({ date: date, category: cat, amount: amt, createdBy: userData })
-    await expenseSaved.save()
-    userData.expenses = userData.expenses.concat({ expense: expenseSaved })
-    await userData.save()
+    userData.expenses = userData.expenses.concat({ date, category, amount })
+    const saved = await userData.save()
     res.status(200).json({ message: "expense added" })
   } catch (error) {
     console.log(error);
@@ -77,4 +73,11 @@ router.post("/addexpense", authenticate, async (req, res) => {
   }
 })
 
-
+router.get("/updatelist", authenticate, async (req, res) => {
+  try {
+    res.send(req.rootUser)
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ error, message: error })
+  }
+})

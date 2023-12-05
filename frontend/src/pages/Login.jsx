@@ -6,38 +6,54 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const submitted = (event)=>{
+  const submitted = async (event) => {
     event.preventDefault()
+    const res = await fetch("/login", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    })
+    const data = await res.json()
+    if (data.error) {
+      alert(data.message)
+      console.log(data.message);
+    } else {
+      alert(data.message)
+      console.log(data.message);
+      navigate("/")
+    }
   }
 
   return (
-    <div className="text-center w-full">
-      <h1 className="font-bold text-3xl mb-8">Log In</h1>
+    <div className="text-center w-full text-white">
+      <h1 className="font-bold text-3xl my-8 text-white">Log In</h1>
       <form
         method="POST"
-        className="border-2 border-black m-auto w-1/3 rounded-xl p-4"
+        className="border-2 border-gray-600 m-auto w-2/3 md:w-1/3 rounded-xl p-4"
       >
         <div className="">
           <div className="text-lg my-3">
-            <label className="mx-3">Email:</label>
+            <label className="mx-3 text-white">Email:</label>
             <input
               type="text"
               name="email"
               placeholder="Email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="bg-indigo-950 text-white outline-none rounded-xl px-2 py-1"
+              className="bg-gray-400 placeholder:text-black text-black outline-none rounded-xl px-2 py-1"
             />
           </div>
           <div className="text-lg my-3">
-            <label className="mx-3">Password:</label>
+            <label className="mx-3 text-white">Password:</label>
             <input
               type="password"
               name="password"
               placeholder="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              className="bg-indigo-950 text-white outline-none rounded-xl px-2 py-1"
+              className="bg-gray-400 placeholder:text-black text-black outline-none rounded-xl px-2 py-1"
             />
           </div>
         </div>
@@ -45,7 +61,7 @@ const Login = () => {
           <input
             type="submit"
             onClick={submitted}
-            className="rounded-xl bg-green-300 px-4 py-2 my-2"
+            className="rounded-xl text-black bg-green-300 px-4 py-2 my-2"
           />
           <p>
             Don't have an account?{" "}

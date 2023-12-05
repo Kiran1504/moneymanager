@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 const Heading = () => {
     const [hamstate, setHamState] = useState(false)
     return (
-        <div className='bg-indigo-600 w-full h-14 flex justify-center md:h-20'>
+        <div className='bg-green-600 w-full h-14 flex justify-center md:h-20 border-b-2 border-b-white'>
             <div className='text-white text-3xl md:text-4xl font-bold h-full flex p-2 items-center justify-center'>
                 Expense Tracker
             </div>
