@@ -5,20 +5,26 @@ import Register from './pages/Register';
 import Heading from './components/Heading';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import { Helmet } from 'react-helmet';
 
 function App() {
   return (
-    <div className="App bg-gray-800 h-screen bg-fixed">
-      <div className="flex flex-col border-b-2 border-b-white mx-2">
-        <Heading />
-        <Navbar />
+    <>
+      <div className="App bg-gray-800 h-screen bg-fixed">
+        <Helmet>
+          <title>Expense Tracker</title>
+        </Helmet>
+        <div className="flex flex-col border-b-2 border-b-white mx-2">
+          <Heading />
+          <Navbar />
+        </div>
+        <Routes>
+          <Route path='/' Component={Home} />
+          <Route path='/signin' Component={Login} />
+          <Route path='/signup' Component={Register} />
+        </Routes>
       </div>
-      <Routes>
-        <Route path='/' Component={Home} />
-        <Route path='/signin' Component={Login} />
-        <Route path='/signup' Component={Register} />
-      </Routes>
-    </div>
+    </>
   );
 }
 
