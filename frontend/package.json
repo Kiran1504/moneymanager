@@ -1,6 +1,6 @@
 {
   "name": "expense",
-  "proxy": "https://expensetracker-mu.vercel.app/",
+  "proxy": "https://track-my-expenses.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
