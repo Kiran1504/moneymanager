@@ -6,9 +6,8 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 
 const Heading = () => {
     const loginStatus = useSelector((state) => state.status);
-    const user = useSelector((state) => state.user);
+    // const user = useSelector((state) => state.user);
     const userName = useSelector((state) => state.userName);
-    console.log(userName);
     // const [hamstate, setHamState] = useState(false)
     return (
         <div className='bg-green-600 w-full h-14 flex justify-center md:h-20 items-center border-b-2 border-b-white'>
