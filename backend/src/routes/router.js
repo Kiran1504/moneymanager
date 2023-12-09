@@ -1,6 +1,5 @@
 import express from "express";
 import { user } from "../models/user.js"
-import { expenses } from "../models/expenseSchema.js";
 import { authenticate } from "../middlewares/authenticate.js";
 
 export const router = express.Router();
@@ -104,6 +103,14 @@ router.post("/deleteexpense", authenticate, async (req, res) => {
 
 router.get("/logout", authenticate, async (req, res) => {
   try {
+    const token = req.token
+    const userData = await user.findOne({ _id: req.userId, "tokens.token": token })
+    if (userData) {
+      userData.tokens = userData.tokens.filter((item) => {
+        return item.token !== token
+      })
+      const saved = await userData.save()
+    }
     res.clearCookie("logintokens")
     res.status(200).json({ message: "User Logout successfull..." })
   } catch (error) {

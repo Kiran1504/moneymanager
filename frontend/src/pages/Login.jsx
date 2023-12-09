@@ -26,7 +26,6 @@ const Login = () => {
       dispatch(login({ user: email }))
       alert(data.message)
       document.cookie = `logintokens=${data.token}`
-      console.log(data.token);
       navigate("/")
     }
   }

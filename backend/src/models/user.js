@@ -63,7 +63,6 @@ userSchema.methods.generateAuthToken = async function () {
         const newToken = jwt.sign({ _id: this._id }, process.env.SECRET_KEY)
         this.tokens = this.tokens.concat({ token: newToken })
         await this.save();
-        console.log(newToken);
         return newToken
     } catch (error) {
         console.log(error);

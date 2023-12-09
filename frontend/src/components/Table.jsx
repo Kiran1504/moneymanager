@@ -17,7 +17,7 @@ const Table = ({ tableItem, refreshPage }) => {
                 })}
             </ul>
         </div>
-    ) : (<div></div>)
+    ) : (<div>{" "}</div>)
 }
 
 export default memo(Table)
