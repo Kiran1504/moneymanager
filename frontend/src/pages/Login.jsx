@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
-import { login } from "../app/authSlice";
+import { login } from "../reducers/authSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ const Login = () => {
 
   const submitted = async (event) => {
     event.preventDefault()
-    const res = await fetch("/login", {
+    const res = await fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -25,7 +25,8 @@ const Login = () => {
     } else {
       dispatch(login({ user: email }))
       alert(data.message)
-      console.log(data.message);
+      document.cookie = `logintokens=${data.token}`
+      console.log(data.token);
       navigate("/")
     }
   }

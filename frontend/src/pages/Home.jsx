@@ -11,7 +11,7 @@ const Home = () => {
         setUpdate(!update);
     }
 
-    const loginStatus = useSelector((state) => state.status);
+    const loginStatus = useSelector((state) => state.auth.status);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
@@ -19,7 +19,7 @@ const Home = () => {
     const fun = async () => {
 
         try {
-            const res = await fetch("/updatelist", {
+            const res = await fetch("http://localhost:5000/updatelist", {
                 method: "GET",
                 headers: {
                     Accept: "appliation/json",
@@ -42,10 +42,16 @@ const Home = () => {
         fun();
     }, [update, loginStatus, navigate])
     return loading ? (
-        <div className=" flex h-3/4 gap-2 flex-col-reverse lg:flex-row max-[1024px]:h-screen bg-inherit justify-center">
-            <Table tableItem={expenses} refreshPage={refresh} />
-            <AddExpense refreshPage={refresh} />
-        </div>
+        <>
+            <div className="flex flex-col sm:flex-row-reverse sm:justify-center sm:gap-4 h-5/6 w-full bg-inherit sm:overflow-hidden">
+                <div className="md:h-full max-[620px]:w-full max-[640px]:w-1/2 max-[640px]:mx-auto h-5/6 bg-inherit my-4">
+                    <AddExpense refreshPage={refresh} />
+                </div>
+                <div className="h-full md:w-2/3 bg-inherit my-4">
+                    <Table tableItem={expenses} refreshPage={refresh} />
+                </div>
+            </div>
+        </>
     ) : <div>loading</div>
 }
 

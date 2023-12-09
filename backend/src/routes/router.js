@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
       expires: new Date(Date.now() + 25892000000),
       httpOnly: true
     })
-    return res.status(201).json({ message: "User Login successfull..." })
+    return res.status(201).json({ message: "User Login successfull...", token: token })
   } catch (error) {
     res.status(400).json({ error: error, message: error })
   }
