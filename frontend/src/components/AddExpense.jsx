@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import CategoryList from './CategoryList';
+import { useDispatch } from 'react-redux';
+import { addExpense } from '../features/expense/expenseSlice';
 
 const AddExpense = ({ refreshPage }) => {
     const [drop, setdrop] = useState(false);
     const [amount, setamount] = useState("");
     const [category, setcategory] = useState("");
     const [date, setdate] = useState("");
+
+    const dispatch = useDispatch();
 
     const [incomemode, setincomemode] = useState(false);
     const [expensemode, setexpensemode] = useState(true);
@@ -28,8 +32,13 @@ const AddExpense = ({ refreshPage }) => {
         setcategory(event.target.value);
     }
 
-    const addExpense = async (event) => {
+    const addExp = async (event) => {
         event.preventDefault();
+        dispatch(addExpense({
+            category,
+            date,
+            amount
+        }))
         try {
             const res = await fetch("/addexpense", {
                 method: "POST",
@@ -45,9 +54,7 @@ const AddExpense = ({ refreshPage }) => {
             const data = await res.json();
             console.log(data);
             if (data.error) {
-                window.alert("Expense not added");
-            } else {
-                window.alert("Expense added successfully");
+                window.alert(data.error);
             }
             setamount("");
             setcategory("");
@@ -57,7 +64,6 @@ const AddExpense = ({ refreshPage }) => {
             setdrop(false);
             ; (refreshPage)()
         } catch (error) {
-            console.log(error);
         }
     }
 
@@ -111,7 +117,7 @@ const AddExpense = ({ refreshPage }) => {
 
                 <div className="my-24 text-center mx-auto ">
                     <h3 className=" font-Ubuntu text-white">Enter the amount</h3>
-                    <form onSubmit={addExpense}>
+                    <form onSubmit={addExp}>
                         <input
                             type="number"
                             onChange={(e) => {

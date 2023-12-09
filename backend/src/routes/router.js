@@ -60,9 +60,12 @@ router.post("/addexpense", authenticate, async (req, res) => {
     return res.status(400).json({ error: "Invalid income/expense detail!!!", message: "Invalid income/expense detail!!!" });
   }
   try {
+    if (!req.userId) {
+      return res.status(400).json({ error: "Plzz Login", message: "Plzz Login" })
+    }
     const userData = await user.findOne({ _id: req.userId })
     if (!userData) {
-      return res.status(400).json({ error: "User doesn't exist!!! plzz Register", message: "User doesn't exist!!! plzz Register" })
+      return res.status(400).json({ error: "Plzz Login", message: "Plzz Login" })
     }
     userData.expenses = userData.expenses.concat({ date, category, amount })
     const saved = await userData.save()
@@ -79,5 +82,41 @@ router.get("/updatelist", authenticate, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({ error, message: error })
+  }
+})
+
+router.post("/deleteexpense", authenticate, async (req, res) => {
+  try {
+    const userData = await user.findOne({ _id: req.userId })
+    if (!userData) {
+      return res.status(400).json({ error: "Error Occurred!!!", message: "Error Occurred!!!" })
+    }
+    userData.expenses = userData.expenses.filter((item) => {
+      return item._id.toString() !== req.body.id
+    })
+    const saved = await userData.save()
+    res.status(200).json({ message: "Expense deleted" })
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error, message: error })
+  }
+})
+
+router.get("/logout", authenticate, async (req, res) => {
+  try {
+    res.clearCookie("logintokens")
+    res.status(200).json({ message: "User Logout successfull..." })
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error, message: error })
+  }
+})
+
+router.get("/getcurrentuser", authenticate, async (req, res) => {
+  try {
+    res.status(200).json({ user: req.rootUser })
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error, message: error })
   }
 })

@@ -1,7 +1,35 @@
 import React, { } from "react";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../app/authSlice";
 
-export default function Navbar() {
+const Navbar = () => {
+    const dispatch = useDispatch()
+    const loginStatus = useSelector((state) => state.status);
+    const navigate = useNavigate()
+
+
+    const logoutUser = async () => {
+        try {
+            const res = await fetch("/logout", {
+                method: "GET",
+                headers: {
+                    Accept: "appliation/json",
+                    "Content-Type": "application/json",
+                },
+                credentials: 'include'
+            })
+            const data = await res.json()
+            if (data) {
+                console.log("logout successfully");
+                dispatch(logout())
+                navigate("/signin")
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
     const classes = ({ isActive, isPending }) =>
@@ -23,25 +51,25 @@ export default function Navbar() {
 
                     <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
                         <NavLink to="/analysis" className={classes}>Analysis</NavLink>
-                    </li>
+                    </li> */}
 
-                    <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
+                    {/* <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
                         <NavLink to="/aboutus" className={classes}>About US</NavLink>
                     </li> */}
 
-
-                    <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
-                        <NavLink to="/signin" className={classes}>Login</NavLink>
-                    </li>
-                    <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
-                        <NavLink to="/signup" className={classes}>Register</NavLink>
-                    </li>
-                    <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
-                        <NavLink to="/logout" className={classes}>Logout</NavLink>
-                    </li>
-                    {/* <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative  ">
-                        <NavLink className="bg-white hover:bg-zinc-500 hover:text-white h-full p-3 md:p-4 min-[876px]:px-14 text-xs px-2 md:text-lg  w-1/4 rounded-md  text-center m-1">Logout</NavLink>
-                    </li> */}
+                    {!loginStatus ? (<>
+                        <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
+                            <NavLink to="/signin" className={classes}>Login</NavLink>
+                        </li>
+                        <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative ">
+                            <NavLink to="/signup" className={classes}>Register</NavLink>
+                        </li>
+                    </>) :
+                        (<>
+                            <li className="m-4 max-[425px]:m-3 max-[425px]:mx-auto hover:-translate-y-1  z-10 relative  ">
+                                <NavLink className="bg-black text-white hover:bg-zinc-500 h-full p-3 md:p-4 min-[876px]:px-14 text-xs px-2 md:text-lg  w-1/4 rounded-md  text-center m-1" onClick={logoutUser}>Logout</NavLink>
+                            </li>
+                        </>)}
 
 
                 </ul>
@@ -49,3 +77,5 @@ export default function Navbar() {
         </>
     );
 }
+
+export default Navbar

@@ -1,22 +1,25 @@
-import React, { memo, useEffect } from 'react'
-import TableItem from './TableItem';
+import React, { memo } from 'react'
+import TableItem from './TableItem'
 
-const Table = ({ tableItem }) => {
-    useEffect(() => {
-        console.log(tableItem);
-    }, [tableItem])
+const Table = ({ tableItem, refreshPage }) => {
 
-    return (
-        <div className='overflow-y-scroll p-2'>
-            <div className="w-full md:w-full border-2 border-gray-600 no-scrollbar overflow-y-scroll h-full m-auto my-2 lg:m-2 rounded-xl">
+    const deleteExpense = () => {
+        ; (refreshPage)()
+    }
+
+    return tableItem !== null ? (
+        <div className='overflow-y-scroll overflow-x-hidden p-2'>
+            <div className="w-full md:w-full border-2 border-gray-600 overflow-x-hidden overflow-y-scroll h-full m-auto my-2 lg:m-2 rounded-xl">
                 <ul className="max-h-4/6">
-                    {tableItem.map((e) => {
-                        return <TableItem key={e._id} id={e._id} date={e.date} category={e.category} amount={e.amount} />
+                    {tableItem.toReversed().map((e) => {
+                        return (
+                            <TableItem key={e._id} id={e._id} category={e.category} date={e.date} amount={e.amount} deleteExp={deleteExpense} />
+                        )
                     })}
                 </ul>
             </div>
         </div>
-    )
+    ) : (<div></div>)
 }
 
 export default memo(Table)

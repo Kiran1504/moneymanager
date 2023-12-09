@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { login } from "../app/authSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const submitted = async (event) => {
     event.preventDefault()
@@ -20,6 +23,7 @@ const Login = () => {
       alert(data.message)
       console.log(data.message);
     } else {
+      dispatch(login({ user: email }))
       alert(data.message)
       console.log(data.message);
       navigate("/")
