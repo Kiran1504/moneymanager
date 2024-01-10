@@ -9,7 +9,7 @@ const TableItem = ({ id, category, date, amount, deleteExp }) => {
     const deleteExpense = async (event) => {
         event.preventDefault();
         try {
-            const res = await fetch("http://localhost:5000/deleteexpense", {
+            const res = await fetch("https://expensebackend-5n0o.onrender.com/deleteexpense", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

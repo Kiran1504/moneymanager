@@ -11,12 +11,12 @@ const Login = () => {
 
   const submitted = async (event) => {
     event.preventDefault()
-    const res = await fetch("http://localhost:5000/login", {
+    const res = await fetch("https://expensebackend-5n0o.onrender.com/login", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include',
+      // credentials: 'include',
       body: JSON.stringify({ email, password })
     })
     const data = await res.json()
@@ -26,7 +26,7 @@ const Login = () => {
     } else {
       dispatch(login({ user: email }))
       alert(data.message)
-      // document.cookie = `logintokens=${data.token}`
+      document.cookie = `logintokens=${data.token}`
       navigate("/")
     }
   }

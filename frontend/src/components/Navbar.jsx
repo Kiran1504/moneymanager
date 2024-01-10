@@ -11,7 +11,7 @@ const Navbar = () => {
 
     const logoutUser = async () => {
         try {
-            const res = await fetch("http://localhost:5000/logout", {
+            const res = await fetch("https://expensebackend-5n0o.onrender.com/logout", {
                 method: "GET",
                 headers: {
                     Accept: "appliation/json",

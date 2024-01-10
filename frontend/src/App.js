@@ -28,7 +28,7 @@ function App() {
     ; (
       async () => {
         try {
-          const res = await fetch("http://localhost:5000/getcurrentuser", {
+          const res = await fetch("https://expensebackend-5n0o.onrender.com/getcurrentuser", {
             method: "GET",
             headers: {
               Accept: "appliation/json",

@@ -19,7 +19,7 @@ const Home = () => {
     const fun = async () => {
 
         try {
-            const res = await fetch("http://localhost:5000/updatelist", {
+            const res = await fetch("https://expensebackend-5n0o.onrender.com/updatelist", {
                 method: "GET",
                 headers: {
                     Accept: "appliation/json",
