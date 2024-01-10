@@ -32,11 +32,12 @@ const AddExpense = ({ refreshPage }) => {
     const addExp = async (event) => {
         event.preventDefault();
         try {
-            const res = await fetch("/addexpense", {
+            const res = await fetch("http://localhost:5000/addexpense", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify({
                     date,
                     category,

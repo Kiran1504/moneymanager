@@ -43,11 +43,15 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ error: "Invalid Credentials!", message: "Invalid Credentials!" })
     }
     const token = await ifUser.generateAuthToken()
-    res.cookie("logintokens", token, {
-      expires: new Date(Date.now() + 25892000000),
-      httpOnly: true
-    })
-    return res.status(201).json({ message: "User Login successfull...", token: token })
+
+    const options = {
+      httpOnly: true,
+      secure: true,
+    }
+    return res
+      .status(201)
+      .cookie("logintokens", token, options)
+      .json({ message: "User Login successfull...", token: token })
   } catch (error) {
     res.status(400).json({ error: error, message: error })
   }
@@ -59,6 +63,7 @@ router.post("/addexpense", authenticate, async (req, res) => {
     return res.status(400).json({ error: "Invalid income/expense detail!!!", message: "Invalid income/expense detail!!!" });
   }
   try {
+    console.log(req.userId, "line no 66");
     if (!req.userId) {
       return res.status(400).json({ error: "Plzz Login", message: "Plzz Login" })
     }
@@ -111,8 +116,10 @@ router.get("/logout", authenticate, async (req, res) => {
       })
       const saved = await userData.save()
     }
-    res.clearCookie("logintokens")
-    res.status(200).json({ message: "User Logout successfull..." })
+    return res
+      .status(200)
+      .clearCookie("logintokens")
+      .json({ message: "User Logout successfull..." })
   } catch (error) {
     console.log(error);
     res.status(400).json({ error: error, message: error })

@@ -18,11 +18,12 @@ const Register = () => {
   const submitted = async (event) => {
     event.preventDefault()
     const { name, email, password } = user
-    const res = await fetch("/register", {
+    const res = await fetch("http://localhost:5000/register", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify({ name, email, password })
     })
     console.log(res);
