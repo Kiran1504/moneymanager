@@ -30,7 +30,7 @@ const Home = () => {
                 credentials: 'include',
 
             })
-            console.log(document.cookie);
+            // console.log(document.cookie);
             const data = await res.json()
             if (data) {
                 setExpenses(data.expenses);
