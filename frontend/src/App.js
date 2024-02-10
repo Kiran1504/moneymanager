@@ -28,15 +28,14 @@ function App() {
     ; (
       async () => {
         try {
-          // const token = sessionStorage.getItem('logintokens');
+          const token = sessionStorage.getItem('logintokens');
 
           const res = await fetch("https://exptrackerbackend.onrender.com/getcurrentuser", {
             method: "GET",
             headers: {
               Accept: "appliation/json",
+              'Authorization': `Bearer ${token}`,
               "Content-Type": "application/json",
-              'Authorization': `Bearer ${document.cookie.split('=')[1]}`,
-
             },
             credentials: 'include'
           })
