@@ -27,7 +27,7 @@ const Navbar = () => {
                 console.log("logout successfully");
                 dispatch(logout())
                 sessionStorage.removeItem('logintokens');
-                delete document.cookie
+                document.cookie = `logintokens=; expires=${new Date(Date.now() + 40)}; path=/;`;
                 navigate("/signin")
             }
 
