@@ -19,7 +19,7 @@ const Home = () => {
     const fun = async () => {
 
         try {
-            const token = sessionStorage.getItem('logintokens');
+            // const token = sessionStorage.getItem('logintokens');
             const res = await fetch("https://exptrackerbackend.onrender.com/updatelist", {
                 method: "GET",
                 headers: {

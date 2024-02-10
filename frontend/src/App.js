@@ -28,7 +28,7 @@ function App() {
     ; (
       async () => {
         try {
-          const token = sessionStorage.getItem('logintokens');
+          // const token = sessionStorage.getItem('logintokens');
 
           const res = await fetch("https://exptrackerbackend.onrender.com/getcurrentuser", {
             method: "GET",
