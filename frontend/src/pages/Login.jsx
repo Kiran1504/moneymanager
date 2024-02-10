@@ -27,7 +27,6 @@ const Login = () => {
       dispatch(login({ user: email }))
       alert(data.message)
       sessionStorage.setItem("logintokens", data.token)
-      document.cookie = `logintokens=${data.token}`
       navigate("/")
     }
   }
