@@ -32,10 +32,13 @@ const AddExpense = ({ refreshPage }) => {
     const addExp = async (event) => {
         event.preventDefault();
         try {
+            const token = sessionStorage.getItem('logintokens');
+
             const res = await fetch("https://exptrackerbackend.onrender.com/addexpense", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`,
                 },
                 credentials: "include",
                 body: JSON.stringify({
@@ -47,7 +50,7 @@ const AddExpense = ({ refreshPage }) => {
             const data = await res.json();
             console.log(data);
             if (data.error) {
-                window.alert(data.error);
+                window.alert(data.error.message);
             }
             setamount("");
             setcategory("");

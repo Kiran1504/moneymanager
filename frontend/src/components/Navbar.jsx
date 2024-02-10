@@ -11,11 +11,14 @@ const Navbar = () => {
 
     const logoutUser = async () => {
         try {
+            const token = sessionStorage.getItem('logintokens');
             const res = await fetch("https://exptrackerbackend.onrender.com/logout", {
                 method: "GET",
                 headers: {
                     Accept: "appliation/json",
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`,
+
                 },
                 credentials: 'include'
             })

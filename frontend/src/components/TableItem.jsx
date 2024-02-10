@@ -9,10 +9,12 @@ const TableItem = ({ id, category, date, amount, deleteExp }) => {
     const deleteExpense = async (event) => {
         event.preventDefault();
         try {
+            const token = sessionStorage.getItem('logintokens');
             const res = await fetch("https://exptrackerbackend.onrender.com/deleteexpense", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`,
                 },
                 credentials: "include",
                 body: JSON.stringify({

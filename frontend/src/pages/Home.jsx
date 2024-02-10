@@ -19,14 +19,18 @@ const Home = () => {
     const fun = async () => {
 
         try {
+            const token = sessionStorage.getItem('logintokens');
             const res = await fetch("https://exptrackerbackend.onrender.com/updatelist", {
                 method: "GET",
                 headers: {
                     Accept: "appliation/json",
+                    'Authorization': `Bearer ${document.cookie.split('=')[1]}`,
                     "Content-Type": "application/json",
                 },
-                credentials: 'include'
+                credentials: 'include',
+
             })
+            console.log(document.cookie);
             const data = await res.json()
             if (data) {
                 setExpenses(data.expenses);
