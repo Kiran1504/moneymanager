@@ -9,7 +9,7 @@ export const authenticate = async (req, res, next) => {
         if (checkToken) {
             // console.log("verifying token");
             const verify = jwt.verify(checkToken, process.env.SECRET_KEY)
-            const rootuser = await user.findOne({ _id: verify._id, "tokens.token": checkToken })
+            const rootuser = await user.findOne({ _id: verify._id })
             if (!rootuser) {
                 throw new Error("User not found")
             }
