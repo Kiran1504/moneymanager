@@ -26,7 +26,7 @@ const Login = () => {
     } else {
       dispatch(login({ user: email }))
       alert(data.message)
-      document.cookie = `logintokens=${data.token}`
+      // document.cookie = `logintokens=${data.token}`
       navigate("/")
     }
   }
