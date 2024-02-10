@@ -3,9 +3,10 @@ import { user } from "../models/user.js"
 
 export const authenticate = async (req, res, next) => {
     try {
-        const checkToken = req.cookies.logintokens;
+        const checkToken = req.cookies.logintokens || req.headers.cookie;
+        // console.log(checkToken);
         if (checkToken) {
-            console.log("verifying token");
+            // console.log("verifying token");
             const verify = jwt.verify(checkToken, process.env.SECRET_KEY)
             const rootuser = await user.findOne({ _id: verify._id, "tokens.token": checkToken })
             if (!rootuser) {
