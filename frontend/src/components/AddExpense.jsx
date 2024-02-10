@@ -32,7 +32,7 @@ const AddExpense = ({ refreshPage }) => {
     const addExp = async (event) => {
         event.preventDefault();
         try {
-            const res = await fetch("https://expensebackend-5n0o.onrender.com/addexpense", {
+            const res = await fetch("https://exptrackerbackend.onrender.com/addexpense", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

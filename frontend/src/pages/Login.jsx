@@ -11,12 +11,12 @@ const Login = () => {
 
   const submitted = async (event) => {
     event.preventDefault()
-    const res = await fetch("https://expensebackend-5n0o.onrender.com/login", {
+    const res = await fetch("https://exptrackerbackend.onrender.com/login", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      // credentials: 'include',
+      credentials: 'include',
       body: JSON.stringify({ email, password })
     })
     const data = await res.json()

@@ -18,7 +18,7 @@ const Register = () => {
   const submitted = async (event) => {
     event.preventDefault()
     const { name, email, password } = user
-    const res = await fetch("https://expensebackend-5n0o.onrender.com/register", {
+    const res = await fetch("https://exptrackerbackend.onrender.com/register", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

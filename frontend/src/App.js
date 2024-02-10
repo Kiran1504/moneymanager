@@ -28,7 +28,7 @@ function App() {
     ; (
       async () => {
         try {
-          const res = await fetch("https://expensebackend-5n0o.onrender.com/getcurrentuser", {
+          const res = await fetch("https://exptrackerbackend.onrender.com/getcurrentuser", {
             method: "GET",
             headers: {
               Accept: "appliation/json",
