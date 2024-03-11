@@ -2,6 +2,7 @@ import React, { } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../reducers/authSlice";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
     const dispatch = useDispatch()
@@ -11,7 +12,7 @@ const Navbar = () => {
 
     const logoutUser = async () => {
         try {
-            const token = sessionStorage.getItem('logintokens');
+            const token = Cookies.get("logintokens");
             const res = await fetch("https://exptrackerbackend.onrender.com/logout", {
                 method: "GET",
                 headers: {

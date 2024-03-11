@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from './reducers/authSlice';
 import { useMediaQuery } from '@mui/material';
 import { closeNavbar } from './reducers/hamStateSlice';
+import Cookies from 'js-cookie';
 
 function App() {
   const navigate = useNavigate()
@@ -28,7 +29,7 @@ function App() {
     ; (
       async () => {
         try {
-          const token = sessionStorage.getItem('logintokens');
+          const token = Cookies.get("logintokens");
 
           const res = await fetch("https://exptrackerbackend.onrender.com/getcurrentuser", {
             method: "GET",

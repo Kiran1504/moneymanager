@@ -3,6 +3,7 @@ import Table from '../components/Table'
 import AddExpense from '../components/AddExpense'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 const Home = () => {
     const [update, setUpdate] = useState(false);
@@ -19,7 +20,8 @@ const Home = () => {
     const fun = async () => {
 
         try {
-            const token = sessionStorage.getItem('logintokens');
+            const token = Cookies.get("logintokens");
+            console.log(token);
             const res = await fetch("https://exptrackerbackend.onrender.com/updatelist", {
                 method: "GET",
                 headers: {

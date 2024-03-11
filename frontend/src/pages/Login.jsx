@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { login } from "../reducers/authSlice";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +27,8 @@ const Login = () => {
     } else {
       dispatch(login({ user: email }))
       alert(data.message)
-      sessionStorage.setItem("logintokens", data.token)
+      Cookies.set("logintokens", data.token)
+      // sessionStorage.setItem("logintokens", data.token)
       navigate("/")
     }
   }
