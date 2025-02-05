@@ -32,9 +32,11 @@ const AddExpense = ({ refreshPage }) => {
     const addExp = async (event) => {
         event.preventDefault();
         try {
-            const token = sessionStorage.getItem('logintokens');
+            // const token = Cookies.get("logintokens");
+            const token = ""
 
-            const res = await fetch("https://exptrackerbackend.onrender.com/addexpense", {
+            const res = await fetch("http://localhost:5000/addexpense", {
+                // const res = await fetch("https://exptrackerbackend.onrender.com/addexpense", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { login } from "../reducers/authSlice";
-import Cookies from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +11,8 @@ const Login = () => {
 
   const submitted = async (event) => {
     event.preventDefault()
-    const res = await fetch("https://exptrackerbackend.onrender.com/login", {
+    const res = await fetch("http://localhost:5000/login", {
+      // const res = await fetch("https://exptrackerbackend.onrender.com/login", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -27,7 +27,8 @@ const Login = () => {
     } else {
       dispatch(login({ user: email }))
       alert(data.message)
-      Cookies.set("logintokens", data.token)
+      // Cookies.set("logintokens", data.token)
+      document.cookie = `logintokens=${data.token};`
       // sessionStorage.setItem("logintokens", data.token)
       navigate("/")
     }
