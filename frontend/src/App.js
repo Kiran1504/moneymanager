@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     ; (
       async () => {
-        const token = document.cookie;
+        const token = localStorage.getItem("logintokens");
         try {
           // const token = Cookies.get("logintokens");
           console.log(token);

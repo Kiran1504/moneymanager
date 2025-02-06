@@ -29,6 +29,7 @@ const Login = () => {
       alert(data.message)
       // Cookies.set("logintokens", data.token)
       document.cookie = `logintokens=${data.token};`
+      localStorage.setItem("logintokens", data.token)
       // sessionStorage.setItem("logintokens", data.token)
       navigate("/")
     }
