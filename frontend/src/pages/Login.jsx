@@ -11,7 +11,7 @@ const Login = () => {
 
   const submitted = async (event) => {
     event.preventDefault()
-    const res = await fetch("http://localhost:5000/login", {
+    const res = await fetch("http://20.244.32.182:5000/login", {
       // const res = await fetch("https://exptrackerbackend.onrender.com/login", {
       method: "POST",
       headers: {

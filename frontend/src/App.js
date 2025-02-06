@@ -33,7 +33,7 @@ function App() {
           console.log(token);
 
           // const res = await fetch("https://exptrackerbackend.onrender.com/getcurrentuser", {
-          const res = await fetch("http://localhost:5000/getcurrentuser", {
+          const res = await fetch("http://20.244.32.182:5000/getcurrentuser", {
             method: "GET",
             headers: {
               Accept: "appliation/json",

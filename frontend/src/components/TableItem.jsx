@@ -10,7 +10,7 @@ const TableItem = ({ id, category, date, amount, deleteExp }) => {
         event.preventDefault();
         try {
             const token = " ";
-            const res = await fetch("http://localhost:5000/deleteexpense", {
+            const res = await fetch("http://20.244.32.182:5000/deleteexpense", {
                 // const res = await fetch("https://exptrackerbackend.onrender.com/deleteexpense", {
                 method: "POST",
                 headers: {

@@ -22,7 +22,7 @@ const Home = () => {
             // const token = Cookies.get("logintokens");
             const token = document.cookie;
             console.log(token);
-            const res = await fetch("http://localhost:5000/updatelist", {
+            const res = await fetch("http://20.244.32.182:5000/updatelist", {
                 // const res = await fetch("https://exptrackerbackend.onrender.com/updatelist", {
                 method: "GET",
                 headers: {
