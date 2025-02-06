@@ -3,13 +3,11 @@ import React, { memo } from 'react'
 // import { removeTodo } from '../features/todo/todoSlice'
 
 const TableItem = ({ id, category, date, amount, deleteExp }) => {
-    // const tableItem = useSelector((state) => state.todos);
-    // const dispatch = useDispatch();
 
     const deleteExpense = async (event) => {
         event.preventDefault();
         try {
-            const token = " ";
+            const token = localStorage.getItem("logintokens");
             const res = await fetch("http://20.244.32.182:5000/deleteexpense", {
                 // const res = await fetch("https://exptrackerbackend.onrender.com/deleteexpense", {
                 method: "POST",

@@ -11,7 +11,7 @@ const Navbar = () => {
 
     const logoutUser = async () => {
         try {
-            const token = "";
+            const token = localStorage.getItem("logintokens");
             const res = await fetch("http://20.244.32.182:5000/logout", {
                 // const res = await fetch("https://exptrackerbackend.onrender.com/logout", {
                 method: "GET",

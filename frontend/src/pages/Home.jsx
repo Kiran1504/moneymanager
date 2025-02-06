@@ -19,8 +19,7 @@ const Home = () => {
     const fun = async () => {
 
         try {
-            // const token = Cookies.get("logintokens");
-            const token = document.cookie;
+            const token = localStorage.getItem("logintokens");
             console.log(token);
             const res = await fetch("http://20.244.32.182:5000/updatelist", {
                 // const res = await fetch("https://exptrackerbackend.onrender.com/updatelist", {

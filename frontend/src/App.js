@@ -29,7 +29,6 @@ function App() {
       async () => {
         const token = localStorage.getItem("logintokens");
         try {
-          // const token = Cookies.get("logintokens");
           console.log(token);
 
           // const res = await fetch("https://exptrackerbackend.onrender.com/getcurrentuser", {
